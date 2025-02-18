@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { Button, HStack } from "@chakra-ui/react"
 
 export default function Home() {
   return (
@@ -13,6 +14,10 @@ export default function Home() {
           height={38}
           priority
         />
+        <HStack>
+          <Button>Click me</Button>
+          <Button>Click me</Button>
+        </HStack>
         <ol>
           <li>
             Get started by editing <code>src/app/page.tsx</code>.
