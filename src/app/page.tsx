@@ -1,8 +1,20 @@
+'use client'
+
+import { useEffect } from 'react'
 import Image from "next/image";
 import styles from "./page.module.css";
-import { Button, HStack } from "@chakra-ui/react"
+import { Button, HStack, Text } from "@chakra-ui/react"
+import { usePioneerContext } from '@/components/providers/pioneer'
 
 export default function Home() {
+  const pioneer = usePioneerContext()
+
+  useEffect(() => {
+    if (pioneer?.state?.app) {
+      console.log('pioneer initialized state', pioneer.state.app)
+    }
+  }, [pioneer?.state?.app]);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -14,6 +26,9 @@ export default function Home() {
           height={38}
           priority
         />
+        <Text>username: {pioneer?.state?.app?.username}</Text>
+        <br/>
+        <Text>blockchains: {pioneer?.state?.app?.blockchains}</Text>
         <HStack>
           <Button>Click me</Button>
           <Button>Click me</Button>
