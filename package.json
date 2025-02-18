@@ -25,5 +25,10 @@
     "eslint": "^9",
     "eslint-config-next": "15.1.7",
     "typescript": "^5"
+  },
+  "pnpm": {
+    "overrides": {
+      "punycode": "2.1.1"
+    }
   }
 }
