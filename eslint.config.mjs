@@ -15,8 +15,15 @@ const eslintConfig = [
     files: ["src/components/ui/color-mode.tsx"],
     rules: {
       "@typescript-eslint/no-empty-object-type": "off",
+      "@typescript-eslint/ no-explicit-any": "off",
     },
   },
+  {
+    // Disable the no-explicit-any rule globally
+    rules: {
+      "@typescript-eslint/no-explicit-any": "off",
+    },
+  }
 ];
 
 export default eslintConfig;

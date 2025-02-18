@@ -3,7 +3,6 @@
 import * as React from 'react'
 import { createContext, useContext } from 'react'
 
-
 type ColorMode = 'light' | 'dark'
 
 // Create Pioneer Context
