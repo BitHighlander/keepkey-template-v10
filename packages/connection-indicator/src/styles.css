@@ -1,0 +1,66 @@
+.kk-connection-indicator-container {
+  position: relative;
+  display: inline-flex;
+  cursor: pointer;
+}
+
+.kk-connection-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+.kk-indicator-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.kk-connected .kk-indicator-dot {
+  background-color: #4caf50;
+  animation: pulse 2s infinite;
+}
+
+.kk-disconnected .kk-indicator-dot {
+  background-color: #f44336;
+}
+
+.kk-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #333;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 100;
+  margin-top: 5px;
+}
+
+.kk-connection-indicator-container:hover .kk-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+} 

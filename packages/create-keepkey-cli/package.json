@@ -1,0 +1,58 @@
+{
+  "name": "create-keepkey-app",
+  "version": "0.1.0",
+  "description": "A CLI tool for creating KeepKey applications",
+  "main": "dist/index.js",
+  "bin": {
+    "create-keepkey-app": "./bin/create-keepkey.js"
+  },
+  "type": "module",
+  "files": [
+    "dist",
+    "bin",
+    "templates"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/keepkey/keepkey-template-monorepo.git",
+    "directory": "packages/create-keepkey-cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "test": "node --test test/*.test.js",
+    "test:watch": "node --test --watch test/*.test.js",
+    "lint": "eslint .",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "keepkey",
+    "cli",
+    "create-app",
+    "template",
+    "scaffold"
+  ],
+  "author": "KeepKey",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "prompts": "^2.4.2",
+    "chalk": "^5.3.0",
+    "fs-extra": "^11.2.0",
+    "ora": "^8.0.1"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^20.11.19",
+    "@types/prompts": "^2.4.9",
+    "eslint": "^8.56.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+} 

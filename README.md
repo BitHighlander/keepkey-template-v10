@@ -1,67 +1,103 @@
-# KeepKey Template
+# KeepKey Template Monorepo
 
-![KeepKey](public/gif/kk.gif)
+This monorepo contains a collection of packages for building applications with KeepKey hardware wallets. It includes templates, reusable components, and tools to help developers get started quickly.
 
-## Overview
+## Packages
 
-This is a starter template for building applications on top of the KeepKey hardware wallet. It provides a foundation for creating secure, user-friendly interfaces that interact with the KeepKey device.
+### @keepkey/template
 
-## Features
+A starter template for building applications on top of the KeepKey hardware wallet. It provides a foundation for creating secure, user-friendly interfaces that interact with the KeepKey device.
 
-- **Next.js Framework**: Built on [Next.js](https://nextjs.org) for modern web development
-- **KeepKey Integration**: Ready-to-use components for interfacing with KeepKey hardware wallets
-- **Pioneer SDK**: Leverages the Pioneer SDK for blockchain interaction
-- **Chakra UI**: Sleek, responsive UI with Chakra UI components
-- **Multi-Chain Support**: Easily work with multiple blockchains
+- Next.js 15+ with App Router
+- TypeScript
+- Chakra UI components
+- Pioneer SDK integration
+- Multi-chain support
 
-## Getting Started
+### @keepkey/connection-indicator
 
-First, install the dependencies:
+A React component for displaying the connection status of KeepKey Desktop. The component provides real-time monitoring and easy integration with any React application.
+
+- Real-time status monitoring
+- Customizable appearance
+- Automatic polling
+- Launch KeepKey Desktop functionality
+
+### create-keepkey-app
+
+A command-line interface for creating new KeepKey applications. It provides templates and configuration options to get developers started quickly.
 
 ```bash
-npm install
-# or
-yarn install
-# or
-pnpm install
+# Using npx (recommended)
+npx create-keepkey-app my-app
+
+# Specify a template
+npx create-keepkey-app my-app --template full
 ```
 
-Next, run the development server:
+## Development
+
+### Setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Install dependencies
+pnpm install
+
+# Build all packages
+pnpm build
+
+# Run development server for the template
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
+### Working on individual packages
 
-## Environment Setup
+```bash
+# Build a specific package
+pnpm --filter=@keepkey/connection-indicator build
 
-Create a `.env.local` file with the following variables:
+# Run development server for the template app
+pnpm --filter=@keepkey/template dev
 
+# Build the CLI
+pnpm --filter=create-keepkey-app build
 ```
-NEXT_PUBLIC_PIONEER_URL=https://pioneer-api.pioneer.app
-NEXT_PUBLIC_PIONEER_WSS=wss://pioneer-api.pioneer.app
+
+## Package Usage
+
+### Using the Connection Indicator
+
+```tsx
+import { ConnectionIndicator } from '@keepkey/connection-indicator';
+
+function App() {
+  return (
+    <div>
+      <h1>My KeepKey App</h1>
+      <ConnectionIndicator />
+    </div>
+  );
+}
 ```
 
-## Customizing for Your Project
+### Creating a new app
 
-1. Modify `src/app/page.tsx` to adjust the landing page content
-2. Update UI components in `src/components/` to match your branding
-3. Extend blockchain functionality through the Pioneer SDK
+```bash
+# Create a new app with the default template
+npx create-keepkey-app my-app
 
-## Learn More
+# Full-featured template with all components
+npx create-keepkey-app my-app --template full
 
-- [KeepKey Documentation](https://docs.keepkey.com)
-- [Pioneer SDK Reference](https://pioneer.app/docs)
-- [Next.js Documentation](https://nextjs.org/docs)
+# Customize the configuration
+npx create-keepkey-app my-app --use-pnpm --no-connection-indicator
+```
 
-## Contributing
+## Documentation
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+- [Template Documentation](./packages/template/README.md)
+- [Connection Indicator](./packages/connection-indicator/README.md)
+- [CLI Tool Documentation](./packages/create-keepkey-cli/README.md)
 
 ## License
 
