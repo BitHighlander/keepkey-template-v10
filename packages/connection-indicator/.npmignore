@@ -1,0 +1,32 @@
+# Source files
+src/
+
+# Tests
+test/
+**/*.test.ts
+**/*.test.tsx
+
+# Configuration
+tsconfig.json
+tsup.config.ts
+.eslintrc.js
+jest.config.js
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-*
+
+# Misc
+.DS_Store
+.gitignore
+.npmrc
+.github
+.turbo
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log* 

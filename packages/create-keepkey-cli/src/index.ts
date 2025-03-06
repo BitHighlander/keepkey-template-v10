@@ -149,7 +149,13 @@ ${chalk.gray('- Include connection indicator:')} ${chalk.cyan(options.connection
     fs.ensureDirSync(path.join(resolvedProjectDir, 'public'));
     
     // Create package.json
-    const packageJson = {
+    const packageJson: {
+      name: string;
+      version: string;
+      private: boolean;
+      scripts: Record<string, string>;
+      dependencies: Record<string, string>;
+    } = {
       name: path.basename(resolvedProjectDir),
       version: '0.1.0',
       private: true,
@@ -169,7 +175,7 @@ ${chalk.gray('- Include connection indicator:')} ${chalk.cyan(options.connection
     
     // Add connection indicator if enabled
     if (options.connectionIndicator) {
-      packageJson.dependencies['@keepkey/connection-indicator'] = 'latest';
+      packageJson.dependencies['@keepkey/connection-indicator'] = '^0.1.0';
     }
     
     // Write package.json

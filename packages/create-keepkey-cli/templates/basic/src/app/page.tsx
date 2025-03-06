@@ -10,7 +10,7 @@ import {
   Heading, 
   Box, 
   Grid,
-  Flex,
+  Flex
 } from "@chakra-ui/react"
 import { usePioneerContext } from '@/components/providers/pioneer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
