@@ -1,8 +1,32 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KeepKey Template
+
+![KeepKey](public/gif/kk.gif)
+
+## Overview
+
+This is a starter template for building applications on top of the KeepKey hardware wallet. It provides a foundation for creating secure, user-friendly interfaces that interact with the KeepKey device.
+
+## Features
+
+- **Next.js Framework**: Built on [Next.js](https://nextjs.org) for modern web development
+- **KeepKey Integration**: Ready-to-use components for interfacing with KeepKey hardware wallets
+- **Pioneer SDK**: Leverages the Pioneer SDK for blockchain interaction
+- **Chakra UI**: Sleek, responsive UI with Chakra UI components
+- **Multi-Chain Support**: Easily work with multiple blockchains
 
 ## Getting Started
 
-First, run the development server:
+First, install the dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+pnpm install
+```
+
+Next, run the development server:
 
 ```bash
 npm run dev
@@ -10,27 +34,35 @@ npm run dev
 yarn dev
 # or
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the application.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Create a `.env.local` file with the following variables:
+
+```
+NEXT_PUBLIC_PIONEER_URL=https://pioneer-api.pioneer.app
+NEXT_PUBLIC_PIONEER_WSS=wss://pioneer-api.pioneer.app
+```
+
+## Customizing for Your Project
+
+1. Modify `src/app/page.tsx` to adjust the landing page content
+2. Update UI components in `src/components/` to match your branding
+3. Extend blockchain functionality through the Pioneer SDK
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [KeepKey Documentation](https://docs.keepkey.com)
+- [Pioneer SDK Reference](https://pioneer.app/docs)
+- [Next.js Documentation](https://nextjs.org/docs)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contributing
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT

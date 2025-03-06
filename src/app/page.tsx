@@ -3,11 +3,43 @@
 import { useEffect } from 'react'
 import Image from "next/image";
 import styles from "./page.module.css";
-import { Button, HStack, Text } from "@chakra-ui/react"
+import { 
+  Button, 
+  HStack, 
+  Stack,
+  Text, 
+  Heading, 
+  Box, 
+  Grid,
+  Flex
+} from "@chakra-ui/react"
 import { usePioneerContext } from '@/components/providers/pioneer'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons'
 
 export default function Home() {
   const pioneer = usePioneerContext()
+  
+  // Handle blockchains data - could be an array or a string
+  const getBlockchainList = () => {
+    if (!pioneer?.state?.app?.blockchains) return [];
+    
+    // If it's already an array, use it as is
+    if (Array.isArray(pioneer.state.app.blockchains)) {
+      return pioneer.state.app.blockchains;
+    }
+    
+    // If it's a string, split it
+    if (typeof pioneer.state.app.blockchains === 'string') {
+      return pioneer.state.app.blockchains.split(',');
+    }
+    
+    // Fallback - return empty array
+    console.warn('Unexpected blockchains format:', pioneer.state.app.blockchains);
+    return [];
+  }
+  
+  const blockchainList = getBlockchainList();
 
   useEffect(() => {
     if (pioneer?.state?.app) {
@@ -18,97 +50,106 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <Text>username: {pioneer?.state?.app?.username}</Text>
-        <br/>
-        <Text>blockchains: {pioneer?.state?.app?.blockchains}</Text>
-        <HStack>
-          <Button>Click me</Button>
-          <Button>Click me</Button>
-        </HStack>
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+        <Stack direction="column" gap={6} alignItems="center" marginBottom={8}>
+          <Box position="relative" width={300} height={200}>
             <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="/gif/kk.gif"
+              alt="KeepKey device"
+              fill
+              style={{ objectFit: 'contain' }}
+              priority
             />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
+          </Box>
+          <Heading as="h1" size="xl">KeepKey Template</Heading>
+          <Text fontSize="lg" textAlign="center" maxWidth="600px">
+            A starter template for building secure applications with KeepKey hardware wallets.
+          </Text>
+        </Stack>
+
+        {pioneer?.state?.app?.username && (
+          <Box marginBottom={8} padding={4} borderRadius="lg" borderWidth="1px">
+            <Text fontSize="md">Connected as: <Text as="span" fontWeight="bold">{pioneer.state.app.username}</Text></Text>
+          </Box>
+        )}
+
+        <Box marginBottom={8} width="100%">
+          <Heading as="h2" size="md" marginBottom={4}>Supported Blockchains</Heading>
+          <Grid 
+            templateColumns={{ 
+              base: "1fr", 
+              sm: "repeat(2, 1fr)", 
+              md: "repeat(3, 1fr)" 
+            }}
+            gap={4}
+            width="100%"
           >
-            Read our docs
-          </a>
-        </div>
+            {blockchainList.map((blockchain: string, index: number) => (
+              <Box 
+                key={index} 
+                borderWidth="1px"
+                borderRadius="lg"
+                padding={4}
+                _hover={{ 
+                  boxShadow: "md", 
+                  borderColor: "blue.500" 
+                }}
+                transition="all 0.2s"
+              >
+                <Heading size="sm" textTransform="capitalize" marginBottom={2}>
+                  {typeof blockchain === 'string' ? blockchain.trim() : blockchain}
+                </Heading>
+                <Text fontSize="xs" color="gray.500">Blockchain</Text>
+              </Box>
+            ))}
+          </Grid>
+        </Box>
+
+        <Box marginBottom={8}>
+          <Heading as="h2" size="md" marginBottom={4}>Get Started</Heading>
+          <Stack direction="column" gap={4} alignItems="flex-start">
+            <HStack gap={4}>
+              <Button colorScheme="blue">
+                <HStack gap={2}>
+                  <Text>Connect Wallet</Text>
+                  <FontAwesomeIcon icon={faArrowRight} />
+                </HStack>
+              </Button>
+              <a 
+                href="https://docs.keepkey.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                style={{ textDecoration: 'none' }}
+              >
+                <Button variant="outline">
+                  View Documentation
+                </Button>
+              </a>
+            </HStack>
+            <Box padding={4} borderRadius="md" bg="gray.50" _dark={{ bg: "gray.700" }} width="100%">
+              <Text fontFamily="mono" fontSize="sm">
+                Edit <code>src/app/page.tsx</code> to customize this page
+              </Text>
+            </Box>
+          </Stack>
+        </Box>
       </main>
+
       <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Flex 
+          direction={{ base: "column", md: "row" }} 
+          gap={4} 
+          alignItems="center"
         >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+          <Text fontSize="sm">Built with KeepKey SDK</Text>
+          <Text fontSize="sm">•</Text>
+          <a href="https://keepkey.com" target="_blank" rel="noopener noreferrer">
+            <Text fontSize="sm" _hover={{ textDecoration: "underline" }}>KeepKey Website</Text>
+          </a>
+          <Text fontSize="sm">•</Text>
+          <a href="https://github.com/keepkey" target="_blank" rel="noopener noreferrer">
+            <Text fontSize="sm" _hover={{ textDecoration: "underline" }}>GitHub</Text>
+          </a>
+        </Flex>
       </footer>
     </div>
   );
