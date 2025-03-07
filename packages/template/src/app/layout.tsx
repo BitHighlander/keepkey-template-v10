@@ -3,7 +3,8 @@ import { Provider } from './provider';
 
 import { Geist, Geist_Mono } from "next/font/google";
 import { KKConnectionStatus } from '@/components/KKConnectionStatus'
-import { Box, Flex, Heading, HStack, Image } from '@chakra-ui/react'
+import { Box, Flex, Heading, HStack } from '@chakra-ui/react'
+import { LogoIcon } from '@/components/logo'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,11 +52,10 @@ export default function RootLayout({
               mx="auto"
             >
               <HStack gap={2}>
-                <Image 
-                  src="/favicon.ico" 
-                  alt="KeepKey Logo" 
+                <LogoIcon 
                   height="24px" 
                   width="24px"
+                  color="white"
                 />
                 <Heading as="h1" size="md">KeepKey Template</Heading>
               </HStack>
