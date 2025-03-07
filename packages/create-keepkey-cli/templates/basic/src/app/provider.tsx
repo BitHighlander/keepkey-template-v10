@@ -44,30 +44,20 @@ function PioneerInitializer({ children, onPioneerReady }: {
         setIsLoading(true)
         setError(null)
         
-        // Initialize Pioneer with retries
-        let retries = 3;
-        while (retries > 0) {
-          try {
-            const pioneerSetup = {
-              appName: 'KeepKey Portfolio',
-              appIcon: 'https://pioneers.dev/coins/keepkey.png',
-              spec: PIONEER_URL,
-              wss: PIONEER_WSS,
-              configWss: {
-                reconnect: true,
-                reconnectInterval: 3000,
-                maxRetries: 5
-              }
-            }
-            console.log('pioneerSetup: ',pioneerSetup)
-            await pioneer.onStart([], pioneerSetup)
-            break;
-          } catch (e) {
-            retries--;
-            if (retries === 0) throw e;
-            await new Promise(resolve => setTimeout(resolve, 2000));
+        // Initialize Pioneer directly without retries
+        const pioneerSetup = {
+          appName: 'KeepKey Portfolio',
+          appIcon: 'https://pioneers.dev/coins/keepkey.png',
+          spec: PIONEER_URL,
+          wss: PIONEER_WSS,
+          configWss: {
+            reconnect: true,
+            reconnectInterval: 3000,
+            maxRetries: 5
           }
         }
+        console.log('pioneerSetup: ', pioneerSetup)
+        await pioneer.onStart([], pioneerSetup)
         
         setIsInitialized(true)
         onPioneerReady(pioneer)
