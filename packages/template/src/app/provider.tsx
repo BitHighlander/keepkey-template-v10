@@ -7,15 +7,8 @@ import { AppProvider } from '@/components/providers/pioneer'
 import { Provider as ChakraProvider } from "@/components/ui/provider"
 import { LogoIcon } from '@/components/logo'
 import { Center, Text } from '@chakra-ui/react'
-import { keyframes } from '@emotion/react'
 // //@ts-ignore
 // import { defaultConfig } from '@saas-ui-pro/react';
-
-const scale = keyframes`
-  0% { transform: scale(0.8); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(0.8); }
-`
 
 interface ProviderProps {
   children: React.ReactNode;
@@ -76,7 +69,8 @@ function PioneerInitializer({ children, onPioneerReady }: {
     return (
       <Center w="100vw" h="100vh" flexDirection="column" gap={4}>
         <LogoIcon 
-          boxSize="8"
+          width="32px"
+          height="32px"
           opacity="0.5"
         />
         <Text color="red.500">Failed to connect to Server!</Text>
@@ -88,8 +82,8 @@ function PioneerInitializer({ children, onPioneerReady }: {
     return (
       <Center w="100vw" h="100vh">
         <LogoIcon 
-          boxSize="8"
-          animation={`5s ease-out ${scale}`}
+          width="32px"
+          height="32px"
           opacity="0.8"
         />
       </Center>

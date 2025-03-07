@@ -1,8 +1,10 @@
 'use client';
 
-import { Box, Circle } from '@chakra-ui/react';
-import { ConnectionIndicator } from '@keepkey/connection-indicator';
+import { Button, Text, Flex } from '@chakra-ui/react';
 import React, { useState } from 'react';
+import { KeepKeyUiGlyph } from './logo/keepkey-ui-glyph';
+import { FaCircle } from 'react-icons/fa';
+import { Icon } from '@chakra-ui/react';
 
 export interface KKConnectionStatusProps {
   /**
@@ -10,71 +12,50 @@ export interface KKConnectionStatusProps {
    * @default "md"
    */
   size?: 'sm' | 'md' | 'lg';
-  
-  /**
-   * Additional props to pass to ConnectionIndicator
-   */
-  connectionIndicatorProps?: React.ComponentProps<typeof ConnectionIndicator>;
 }
 
-/**
- * A Chakra UI styled connection status indicator for KeepKey Desktop
- */
 export function KKConnectionStatus({ 
-  size = 'md',
-  connectionIndicatorProps 
+  size = 'md'
 }: KKConnectionStatusProps) {
   const [isConnected, setIsConnected] = useState(false);
   
-  const sizesMap = {
-    sm: { dot: '8px', container: '16px' },
-    md: { dot: '10px', container: '20px' },
-    lg: { dot: '12px', container: '24px' },
+  // Demo connection toggle - replace with actual connection logic
+  const toggleConnection = () => {
+    setIsConnected(!isConnected);
   };
   
-  const dimensions = sizesMap[size];
-  const connectedColor = 'green.500';
-  const disconnectedColor = 'red.500';
-  
-  // Custom indicators using Chakra UI
-  const connectedIndicator = (
-    <Circle size={dimensions.container} bg="transparent" border="1px solid" borderColor={connectedColor}>
-      <Circle size={dimensions.dot} bg={connectedColor} />
-    </Circle>
-  );
-  
-  const disconnectedIndicator = (
-    <Circle size={dimensions.container} bg="transparent" border="1px solid" borderColor={disconnectedColor}>
-      <Circle size={dimensions.dot} bg={disconnectedColor} />
-    </Circle>
-  );
-  
-  // Handle connection status change
-  const handleConnectionChange = (isConnected: boolean) => {
-    setIsConnected(isConnected);
+  const sizesMap = {
+    sm: { icon: '16px', fontSize: 'xs' },
+    md: { icon: '20px', fontSize: 'sm' },
+    lg: { icon: '24px', fontSize: 'md' },
   };
   
   return (
-    <Box 
-      display="inline-flex" 
-      p={2} 
-      border="1px solid" 
-      borderColor="gray.600" 
-      borderRadius="md"
-      cursor="pointer"
-      _hover={{ bg: 'gray.700' }}
-      position="relative"
-      title={isConnected ? "KeepKey Desktop Connected" : "KeepKey Desktop Disconnected - Click to Launch"}
+    <Button
+      variant="outline"
+      bg="gray.800"
+      color="white"
+      borderColor="gray.600"
+      size={size}
+      p={2}
+      onClick={toggleConnection}
     >
-      <ConnectionIndicator
-        showTooltip={false}
-        connectedIndicator={connectedIndicator}
-        disconnectedIndicator={disconnectedIndicator}
-        connectionOptions={{
-          pollingInterval: 5000, // Check more frequently (every 5 seconds)
-        }}
-        {...connectionIndicatorProps}
-      />
-    </Box>
+      <Flex alignItems="center">
+        <KeepKeyUiGlyph 
+          height={sizesMap[size].icon} 
+          width={sizesMap[size].icon}
+          color="currentColor"
+          mr={2}
+        />
+        <Text fontSize={sizesMap[size].fontSize} mr={2}>
+          {isConnected ? "Connected" : "Connect"}
+        </Text>
+        <Icon 
+          as={FaCircle} 
+          color={isConnected ? "green.500" : "red.500"} 
+          boxSize="8px"
+        />
+      </Flex>
+    </Button>
   );
 } 
